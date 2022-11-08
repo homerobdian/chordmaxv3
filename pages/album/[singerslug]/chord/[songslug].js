@@ -150,24 +150,8 @@ const SongSlug = ({ data }) => {
   );
 };
 
-// pages/blog/[slug].js
-export async function getStaticPaths(context) {
-  const response = await axios.get(
-    `${process.env.BASE_URL}/api/client/song/getallslugsong`
-  );
-  const paths = response.data.map((song) => ({
-    params: {
-      singerslug: `${song.singerSlug}`,
-      songslug: `${song.slug}`,
-    },
-  }));
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps(context) {
+// This gets called on every request
+export async function getServerSideProps(context) {
   const slug = context.params.songslug;
   // Fetch data from external API
   const res = await axios.get(
@@ -178,10 +162,45 @@ export async function getStaticProps(context) {
   const req = await axios.post(
     `${process.env.BASE_URL}/api/client/song/addviewsong?id=${data._id}`
   );
-  console.log(req);
+
+  // Pass data to the page via props
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data },
   };
 }
+
+// // pages/blog/[slug].js
+// export async function getStaticPaths(context) {
+//   const response = await axios.get(
+//     `${process.env.BASE_URL}/api/client/song/getallslugsong`
+//   );
+//   const paths = response.data.map((song) => ({
+//     params: {
+//       singerslug: `${song.singerSlug}`,
+//       songslug: `${song.slug}`,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+// export async function getStaticProps(context) {
+//   const slug = context.params.songslug;
+//   // Fetch data from external API
+//   const res = await axios.get(
+//     `${process.env.BASE_URL}/api/client/song/getsongbyslug?slug=${slug}`
+//   );
+
+//   const data = res.data;
+//   const req = await axios.post(
+//     `${process.env.BASE_URL}/api/client/song/addviewsong?id=${data._id}`
+//   );
+//   console.log(req);
+//   return {
+//     props: { data }, // will be passed to the page component as props
+//   };
+// }
 
 export default SongSlug;
