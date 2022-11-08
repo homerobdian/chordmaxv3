@@ -1,0 +1,16 @@
+body {
+  background: #1f2937;
+}
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "./prism.css";
+@import "tailwindcss/utilities";
+
+.chordmax-tooltip {
+  color: rgb(82, 230, 180);
+  outline: 0;
+  position: relative;
+  text-decoration: none;
+  border-bottom: 1px dotted #000;
+}
