@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
   );
 
   const list = await axios.get(
-    `${process.env.BASE_URL}/api/client/song/getsonglistbysingerid?id=${singer.data.singerId}`
+    `${process.env.BASE_URL}/api/client/song/getsonglistbysingerid?singername=${singer.data.singerName}`
   );
 
   const data = list.data;

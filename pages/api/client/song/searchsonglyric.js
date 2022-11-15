@@ -9,7 +9,7 @@ export default async (req, res) => {
   const pipeline = [
     {
       $search: {
-        index: "default",
+        index: "songlyricindex",
         text: {
           query: query,
           path: {
@@ -33,11 +33,8 @@ export default async (req, res) => {
     if (!data) {
       res.status(404).json({ msg: "data not found" });
     }
-    console.log(data);
-
     res.status(200).json(data);
   } catch (error) {
     res.status(404).json({ msg: "request failed" });
-    console.log(error);
   }
 };

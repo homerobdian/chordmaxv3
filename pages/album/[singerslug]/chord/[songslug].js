@@ -14,9 +14,25 @@ import NextBreadcumbs from "../../../../components/front/NextBreadcumbs.js";
 const SongSlug = ({ data }) => {
   const [currentTranspose, setCurentTranspose] = useState(0);
   const chordPatern =
-    /([A-G](#|b)?)(\(?(M|maj|major|m|min|minor|dim|sus|dom|aug)?(\+|-|add)?\d*\)?)(\/([A-G](#|b)?))?[^aeioukvzxlpqrsthnw"]/g;
+    /(\(*[CDEFGAB](?:b|bb)*(?:#|##|sus|maj|min|aug|m|M|dim|°|[0-9])*[\(]?[\d\/]*[\)]?(?:[CDEFGAB](?:b|bb)*(?:#|##|sus|maj|min|aug|m|M|°|[0-9])*[\d\/]*)*\)*)(?=[\s|$])(?! [a-z])/g;
   const songLyric = data.songLyric;
-  const chordReplace = songLyric.replace(chordPatern, function (value) {
+  const str = songLyric
+    .replace(/\:/g, " : ")
+    .replace(/\-/g, " - ")
+    .replace(/\./g, " . ")
+    .replace(/\,/g, " , ")
+    .replace(/\]/g, " ] ")
+    .replace(/\[/g, " [ ")
+    .replace(/\*/g, " * ")
+    .replace(/\(/g, " ( ")
+    .replace(/\)/g, " ) ")
+    .replace(/\=/g, " = ")
+    .replace(/\…/g, " . ")
+    .replace(/\|/g, " | ")
+    .replace(/\&#(.*?);/g, " &#$1; ")
+    .replace(/^[\s]+/, "")
+    .replace(/[\s]+$/, "");
+  const chordReplace = str.replace(chordPatern, function (value) {
     return (
       "<a class='chordmax-tooltip text-xs'>" +
       value +
