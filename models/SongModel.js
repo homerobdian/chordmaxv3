@@ -8,6 +8,8 @@ const Song = mongoose.Schema(
     singerId: Number,
     singerName: String,
     songLike: Number,
+    isPopular: Number,
+    viewInWeek: Number,
     slug: {
       type: String,
       unique: true,
@@ -15,6 +17,7 @@ const Song = mongoose.Schema(
     },
     singerSlug: String,
     views: Number,
+    keywords: String,
   },
   { timestamps: true }
 );

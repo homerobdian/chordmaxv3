@@ -14,6 +14,10 @@ export default async (req, res) => {
   const singerName = req.body.singerName;
   const slg = generateSlug(songName);
   const slug = slg + `-` + generateSlugId(4).toLowerCase();
+  const keywords = `${singerName},${songName}`;
+  const singerSlug = req.body.singerSlug;
+
+  console.log(singerSlug);
 
   const body = {
     songName: songName,
@@ -23,6 +27,8 @@ export default async (req, res) => {
     songLike: 0,
     slug: slug,
     views: 0,
+    singerSlug: singerSlug,
+    keywords: keywords,
   };
 
   try {
