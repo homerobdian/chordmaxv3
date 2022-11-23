@@ -10,7 +10,7 @@ export default async function (req, res) {
     const response = await Singer.find()
       .limit(limit * 1)
       .skip((page - 1) * limit)
-      .sort({ singerId: -1 })
+      .sort({ _id: -1 })
       .exec();
 
     const count = await Singer.countDocuments();

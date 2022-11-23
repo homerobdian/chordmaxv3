@@ -10,6 +10,7 @@ const Song = mongoose.Schema(
     songLike: Number,
     isPopular: Number,
     viewInWeek: Number,
+    viewInToday: Number,
     slug: {
       type: String,
       unique: true,

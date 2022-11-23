@@ -12,6 +12,7 @@ const Singer = new Schema(
     },
     singerName: String,
     abjad: String,
+    isPopular: Number,
     slug: {
       type: String,
       unique: true,
